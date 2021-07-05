@@ -1,57 +1,22 @@
-# spring-azure-demo
+# Spring CRUD App
+This repository will help you to Deploy your spring boot CRUD application on Azure.
+You can also do continuous deployment.
 
-Steps 
 
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
-name: Build and deploy JAR app to Azure Web App - CrudAzureAPI
-
-on:
-push:
-branches:
-- main
-workflow_dispatch:
-
-jobs:
-build:
-runs-on: ubuntu-latest
-
-steps:
-- uses: actions/checkout@v2
-
-- name: Set up Java version
-uses: actions/setup-java@v1
-with:
-java-version: '8'
-
-- name: Build with Maven
-run: mvn clean install
-
-- name: Upload artifact for deployment job
-uses: actions/upload-artifact@v2
-with:
-name: java-app
-path: '${{ github.workspace }}/target/*.jar'
-
-deploy:
-runs-on: ubuntu-latest
-needs: build
-environment:
-name: 'production'
-url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-steps:
-- name: Download artifact from build job
-uses: actions/download-artifact@v2
-with:
-name: java-app
-
-- name: Deploy to Azure Web App
-id: deploy-to-webapp
-uses: azure/webapps-deploy@v2
-with:
-app-name: 'CrudAzureAPI'
-slot-name: 'production'
-publish-profile: ${{ secrets.AzureAppService_PublishProfile_218c90f22c1941ba883846f6a62f88af }}
-package: '*.jar'
+## Steps
+* Step 1 : Create MySql Database on Azure
+* Step 2 : Create Database name demo (Create database demo)
+* Step 3 : Create Table Employee (create table employee(empId int primary key AUTO_INCREMENT, name varchar(35), address varchar(35), dob Date, salary int))
+* Step 4 : Download this repository
+* Step 5 : Open src/main/resources/application.properties file
+* Step 5 : Fill all your database details on this file.
+* Step 6 : Run this repository (mvn clean package , mvn spring-boot:run). It should work fine. Test api endpoints using PostMan or some other tools.
+* Step 7 : Create a Github Repository.
+* Step 8 : Push complete code to it.
+* Step 9 : Go to Azure, open App services
+* Step 10 : Choose runtime stack as Java8 , web server stack as Java SE(Embedded server) and app service plan according to you.
+* Step 11 : Create the App
+* Step 12 : Go to deployment center on left.
+* Step 13 : Choose Source as Github , Authorize yourself, Choose you Repository
+* Step 14 : And save it. It will deploy you application on Azure
+* Step 15 : If you want to do any changes in API, Go to your IDE, make change, push it on Github. After some time it will start reflecting on your API.
