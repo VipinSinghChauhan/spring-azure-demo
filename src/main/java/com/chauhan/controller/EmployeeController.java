@@ -21,6 +21,11 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 
+	@GetMapping("/")
+	public String message() {
+		return "Welcome to the Application!";
+	}
+
 	@GetMapping("/employee/{empId}")
 	public Optional<Employee> getEmployee(@PathVariable("empId") int id) {
 		return employeeService.getEmployee(id);
